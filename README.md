@@ -17,8 +17,8 @@ The backend is containerized using Docker and orchestrated with Docker Compose, 
 
 1. Clone the Repository
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/Navi-Friend/products-api
+cd https://github.com/Navi-Friend/products-api
 ```
 
 2. Start the Application
