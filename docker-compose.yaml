@@ -1,0 +1,49 @@
+services:
+  backend:
+    image: test_backend
+    build: 
+      context: ./server
+    depends_on:
+      - db
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    volumes:
+      - ./server:/app  # Монтирование текущего кода
+      - /app/node_modules  # Исключение перезаписи node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Для отслеживания изменений в Docker
+      - MONGO_URI=mongodb://${DB_USERNAME}:${DB_PASSWORD}@db:27017/test_db?authSource=admin
+      - BACKEND_PORT=${BACKEND_PORT}
+    command: npm run dev  # Автоперезагрузка (nodemon, vite и т.д.)   
+
+  frontend:
+    image: test_frontend
+    build:
+      context: ./client
+    depends_on:
+      - backend
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev
+    restart: unless-stopped
+  db:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:
