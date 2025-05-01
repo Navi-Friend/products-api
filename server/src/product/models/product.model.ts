@@ -22,7 +22,7 @@ export enum ProductCategory {
 
 export interface IProduct extends Document {
 	name: string;
-	description: string;
+	description?: string;
 	price: number;
 	quantity: number;
 	category: ProductCategory;

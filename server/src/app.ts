@@ -6,6 +6,7 @@ import { inject, injectable } from 'inversify';
 import IExceptionFilter from './exceptions/exception.filter.interface';
 import { MongooseService } from './database/mongoose.service';
 import { ProductController } from './product/controllers/product.controller';
+import cors from 'cors';
 
 @injectable()
 export class App {
@@ -28,6 +29,13 @@ export class App {
 
 	useMiddleware(): void {
 		this.app.use(json());
+		this.app.use(
+			cors({
+				origin: 'http://localhost:5173', // URL вашего Vite-фронтенда
+				methods: ['GET', 'POST', 'PUT', 'DELETE'],
+				allowedHeaders: ['Content-Type', 'Authorization'],
+			}),
+		);
 	}
 
 	useRoutes(): void {

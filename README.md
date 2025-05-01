@@ -1,6 +1,6 @@
 # Product App
 
-## Product API
+![Product App](image.png)
 
 ### Overview
 This is the backend for the Product API, a RESTful service for managing products with CRUD operations and statistics. Built with Node.js, Express, MongoDB, Mongoose, and TypeScript, it follows a clean architecture pattern to ensure maintainability and scalability. The API provides endpoints for creating, reading, updating, and deleting products, as well as retrieving product statistics.
@@ -41,6 +41,8 @@ To also remove volumes (including MongoDB data):
 docker-compose down -v
 ```
 
+## Product API
+
 ### API Documentation
 The API is documented using a Postman collection:
 
@@ -74,3 +76,30 @@ The backend provides the following endpoints:
 - **500 (Internal Server Error)**: Unexpected server issues.
 
 ## Product Frontend
+
+### Description
+A React frontend application with TypeScript, built using modern web technologies.
+
+### Tech Stack
+- React 19 (with Hooks)
+
+- TypeScript for static typing
+
+- Vite for build tool
+
+- Tailwind CSS for styling
+
+- Redux Toolkit for state management
+
+- React Query (TanStack Query) for API handling
+
+- React Router for navigation
+
+- Recharts for data visualization
+
+- Zod for data validation
+
+- React Toastify for notifications
+
+### License
+MIT
