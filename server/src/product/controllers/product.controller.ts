@@ -7,6 +7,8 @@ import { ILoggerService } from '../../logger/logger.service.interface';
 import { ValidateDTOMiddleware } from '../../common/middleware/validate-dto.middleware';
 import { CreateProductDTO } from '../dto/create-product.dto';
 import { ValidateIdMiddleware } from '../../common/middleware/validate-id.middleware';
+import { AppError } from '../../exceptions/errors/app-error';
+import { ERROR_STATUSES } from '../../exceptions/errors/errorStatuses';
 
 @injectable()
 export class ProductController extends BaseController {
@@ -89,6 +91,15 @@ export class ProductController extends BaseController {
 				req.params.id,
 				req.body,
 			);
+			if (!product) {
+				next(
+					new AppError(
+						404,
+						ERROR_STATUSES.DATA_NOT_FOUND,
+						`Products with id ${req.params.id} is not found`,
+					),
+				);
+			}
 			res.status(200).json(product);
 		} catch (error) {
 			next(error);
@@ -104,7 +115,16 @@ export class ProductController extends BaseController {
 			const product = await this.productService.getProductById(
 				req.params.id,
 			);
-			res.status(200).json(product ?? {});
+			if (!product) {
+				next(
+					new AppError(
+						404,
+						ERROR_STATUSES.DATA_NOT_FOUND,
+						`Products with id ${req.params.id} is not found`,
+					),
+				);
+			}
+			res.status(200).json(product);
 		} catch (error) {
 			next(error);
 		}
@@ -132,6 +152,16 @@ export class ProductController extends BaseController {
 			const product = await this.productService.deleteProduct(
 				req.params.id,
 			);
+			if (!product) {
+				next(
+					new AppError(
+						404,
+						ERROR_STATUSES.DATA_NOT_FOUND,
+						`Products with id ${req.params.id} is not found`,
+					),
+				);
+				return;
+			}
 			res.status(200).json(product);
 		} catch (error) {
 			next(error);

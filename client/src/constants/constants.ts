@@ -1,4 +1,4 @@
 export const PAGES = {
-    main: "/",
-    statistics: "/statistics",
+  main: "/",
+  statistics: "/statistics",
 };

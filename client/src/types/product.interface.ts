@@ -1,34 +1,34 @@
 export enum ProductCategory {
-    Electronics = "electronics",
-    Clothing = "clothing",
-    Products = "products",
+  Electronics = "electronics",
+  Clothing = "clothing",
+  Products = "products",
 }
 
 export interface IProduct {
-    _id: string;
-    name: string;
-    description?: string;
-    price: number;
-    quantity: number;
-    category: ProductCategory;
-    __v: number;
+  _id: string;
+  name: string;
+  description?: string;
+  price: number;
+  quantity: number;
+  category: ProductCategory;
+  __v: number;
 }
 
 export interface ProductFormData {
-    name: string;
-    description?: string;
-    price: number;
-    quantity: number;
-    category: ProductCategory;
+  name: string;
+  description?: string;
+  price: number;
+  quantity: number;
+  category: ProductCategory;
 }
 
 export interface ProductCategoryStat {
-    count: number;
-    category: ProductCategory;
-  }
+  count: number;
+  category: ProductCategory;
+}
 
 export interface ProductStatistics {
-    totalProducts: number;
-    averagePrice: number;
-    productsByCategory: ProductCategoryStat[];
+  totalProducts: number;
+  averagePrice: number;
+  productsByCategory: ProductCategoryStat[];
 }
